@@ -11,4 +11,4 @@ main: $(OBJ)
 	$(CC) -c $< $(CFLAGS) -o $@
 
 clean:
-	rm -rf *.o utils/*.o main
+	find . -name '*.o' -exec rm -rf {} \;
