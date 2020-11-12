@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
 
 	w = 600;
 	h = 500;
-	title = "Pure C App";
+	title = "macOS App in C";
 
 	struct arg_t *args = parse_args(argc, argv);
 	for(i = 0; i < (argc > ARGS_MAX ? ARGS_MAX : argc); i++) {
@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 						if(c == 1) {
 							skipNext = true;
 							char *content = (*(args + i + 1)).content;
-							title = strlen(content) < 2 ? "Pure C App" : content;
+							title = strlen(content) < 2 ? "macOS App in C" : content;
 						} else {
 							continue;
 						}
