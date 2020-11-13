@@ -21,7 +21,8 @@
 #define msg ((id (*)(id, SEL, ...))objc_msgSend)
 #define cls_msg ((id (*)(Class, SEL, ...))objc_msgSend)
 #define cls_init(c) msg(msg((id)cls(c), sel("alloc")), sel("init"))
-#define cls_alloc objc_allocateClassPair
+#define cls_alloc(c) msg((id)cls(c), sel("alloc")) 
+#define cls_allpr objc_allocateClassPair
 #define cls_mthd class_addMethod
 #define cls_pair objc_registerClassPair
 
@@ -43,6 +44,25 @@ typedef enum NSWindowStyleMask {
 typedef enum NSBackingStoreType {
 	NSBackingStoreTypeBuffered = 2,
 } NSBackingStoreType;
+
+typedef enum NSBezelStyle {
+	NSBezelStyleRounded = 1,
+} NSBezelStyle;
+
+typedef enum NSVisualEffectMaterial {
+	NSVisualEffectMaterialWindowBackground = 12,
+} NSVisualEffectMaterial;
+
+typedef enum NSVisualEffectBlendingMode {
+  NSVisualEffectBlendingModeBehindWindow = 0,
+  NSVisualEffectBlendingModeWithinWindow = 1,
+} NSVisualEffectBlendingMode;
+
+typedef enum NSVisualEffectState {
+  NSVisualEffectStateFollowsWindowActiveState,
+  NSVisualEffectStateActive,
+  NSVisualEffectStateInactive,
+} NSVisualEffectState;
 
 /* typedef structs */
 typedef struct arg_t {

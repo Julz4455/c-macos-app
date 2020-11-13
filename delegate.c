@@ -1,7 +1,7 @@
 #import "delegate.h"
 
 void initDelegate() {
-	AppDelegateClass = cls_alloc((Class)cls("NSObject"), "AppDelegate", 0);
+	AppDelegateClass = cls_allpr((Class)cls("NSObject"), "AppDelegate", 0);
 
 	cls_mthd(AppDelegateClass, 
 					 sel("applicationShouldTerminateAfterLastWindowClosed:"), 

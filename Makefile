@@ -1,7 +1,7 @@
 CC = clang
 CFLAGS = -Wall
 LDFLAGS = -framework Cocoa -framework AppKit -framework Foundation -lobjc
-OBJ = main.o delegate.o util/args.o util/win.o util/str.o
+OBJ = main.o delegate.o util/args.o util/drawing.o util/win.o util/str.o
 TARGET = main
 
 main: $(OBJ)

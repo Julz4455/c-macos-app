@@ -1,6 +1,7 @@
 #import "Common.h"
 #import "util/args.h"
 #import "util/win.h"
+#import "util/drawing.h"
 #import "delegate.h"
 
 int main(int argc, char **argv) {
@@ -58,7 +59,7 @@ int main(int argc, char **argv) {
 	}
 	msg(app, sel("setActivationPolicy:"), NSApplicationActivationPolicyRegular);
 
-	struct CGRect frameRect = win_createFrame(0, 0, 1280, 720);
+	struct CGRect frameRect = drawing_createFrame(0, 0, 1280, 720);
 	int styleMask = NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskResizable;
 	int backingStore = NSBackingStoreTypeBuffered;
 	bool defer = false;
@@ -66,6 +67,19 @@ int main(int argc, char **argv) {
 	id win = new_appWindow(frameRect, styleMask, backingStore, defer);
 	win_setTitle(win, title);
 	msg(win, sel("center"));
+	msg(win, sel("setTitlebarAppearsTransparent:"), true);
+	id visualEffectView = msg((id)cls_alloc("NSVisualEffectView"), sel("initWithFrame:"), drawing_createFrame(0, 0, 0, 0));
+	msg(visualEffectView, sel("setMaterial:"), NSVisualEffectMaterialWindowBackground);
+	msg(visualEffectView, sel("setBlendingMode:"), NSVisualEffectBlendingModeBehindWindow);
+	msg(visualEffectView, sel("setState:"), NSVisualEffectStateActive);
+	msg(win, sel("setContentView:"), visualEffectView);
+
+	/* General Drawing Code */
+
+	id mainView = msg((id)cls_alloc("NSView"), sel("initWithFrame:"), drawing_createFrame(0, 0, 1280, 720));
+	msg(mainView, sel("setWantsLayer:"), true);
+	msg(msg(mainView, sel("layer")), sel("setBackgroundColor:"), msg(cls_msg(cls("NSColor"), sel("whiteColor")), sel("CGColor")));
+	// msg(msg(win, sel("contentView")), sel("addSubview:"), mainView);
 
 	id appDelegate = cls_init("AppDelegate");
 	msg(app, sel("setDelegate:"), appDelegate);
