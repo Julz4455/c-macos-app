@@ -34,11 +34,12 @@ typedef enum NSApplicationActivationPolicy {
 } NSApplicationActivationPolicy;
 
 typedef enum NSWindowStyleMask {
-	NSWindowStyleMaskBorderless     = 0,
-	NSWindowStyleMaskTitled         = 1 << 0,
-	NSWindowStyleMaskClosable       = 1 << 1,
-	NSWindowStyleMaskMiniaturizable = 1 << 2,
-	NSWindowStyleMaskResizable      = 1 << 3,
+	NSWindowStyleMaskBorderless          = 0,
+	NSWindowStyleMaskTitled              = 1 << 0,
+	NSWindowStyleMaskClosable            = 1 << 1,
+	NSWindowStyleMaskMiniaturizable      = 1 << 2,
+	NSWindowStyleMaskResizable           = 1 << 3,
+	NSWindowStyleMaskFullSizeContentView = 1 << 15,
 } NSWindowStyleMask;
 
 typedef enum NSBackingStoreType {
@@ -49,8 +50,15 @@ typedef enum NSBezelStyle {
 	NSBezelStyleRounded = 1,
 } NSBezelStyle;
 
+typedef enum NSButtonType {
+	NSButtonTypeMomentaryLight = 0
+} NSButtonType;
+
 typedef enum NSVisualEffectMaterial {
+	NSVisualEffectMaterialLight = 1,
 	NSVisualEffectMaterialWindowBackground = 12,
+	NSVisualEffectMaterialContentBackground = 18,
+	NSVisualEffectMaterialUnderWindowBackground = 21
 } NSVisualEffectMaterial;
 
 typedef enum NSVisualEffectBlendingMode {
@@ -59,9 +67,9 @@ typedef enum NSVisualEffectBlendingMode {
 } NSVisualEffectBlendingMode;
 
 typedef enum NSVisualEffectState {
-  NSVisualEffectStateFollowsWindowActiveState,
-  NSVisualEffectStateActive,
-  NSVisualEffectStateInactive,
+  NSVisualEffectStateFollowsWindowActiveState = 0,
+  NSVisualEffectStateActive = 1,
+  NSVisualEffectStateInactive = 2,
 } NSVisualEffectState;
 
 /* typedef structs */
