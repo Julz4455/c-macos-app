@@ -1,13 +1,13 @@
 #import "Common.h"
-#import "util/args.h"
 #import "util/win.h"
 #import "util/str.h"
-#import "util/drawing.h"
 #import "delegate.h"
+#import "util/args.h"
+#import "util/drawing.h"
+#import "cls/controller.h"
 
 int main(int argc, char **argv) {
-	int i, w, h, c;
-	char* title;
+	int i, c;
 	bool skipNext;
 
 	w = 1280;
@@ -51,7 +51,9 @@ int main(int argc, char **argv) {
 		}
 	}
 
+	/* Custom Class Init */
 	initDelegate();
+	initController();
 
 	id app = cls_msg(cls("NSApplication"), sel("sharedApplication"));
 	if(app == NULL) {
@@ -61,13 +63,13 @@ int main(int argc, char **argv) {
 	msg(app, sel("setActivationPolicy:"), NSApplicationActivationPolicyRegular);
 
 	struct CGRect frameRect = drawing_createFrame(0, 0, w, h);
-	int styleMask = NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskMiniaturizable|NSWindowStyleMaskResizable|NSWindowStyleMaskFullSizeContentView;
+	int styleMask = NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskMiniaturizable|NSWindowStyleMaskFullSizeContentView;//|NSWindowStyleMaskResizable;
 	int backingStore = NSBackingStoreTypeBuffered;
 	bool defer = false;
 	bool vibrant = true;
 	bool tbt = true;
 
-	id win = new_appWindow(frameRect, styleMask, backingStore, defer, tbt, vibrant);
+	win = new_appWindow(frameRect, styleMask, backingStore, defer, tbt, vibrant);
 	win_setTitle(win, title);
 
 	id appDelegate = cls_init("AppDelegate");

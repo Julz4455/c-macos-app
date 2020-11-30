@@ -1,4 +1,5 @@
 #import "win.h"
+#import "../cls/controller.h"
 #import "str.h"
 #import "drawing.h"
 
@@ -10,19 +11,13 @@ id new_appWindow(struct CGRect frameRect, int styleMask, int backingStore, bool 
 						 backingStore,
 						 defer);
 	msg(win, sel("center"));
+	/* View Controller */
+	controller = cls_init("ViewController");
+	msg(win, sel("setContentViewController:"), controller);
 	msg(win, sel("setTitlebarAppearsTransparent:"), tbt);
 	if(vibrant) {
 		msg(win, sel("setOpaque:"), false);
 		msg(win, sel("setBackgroundColor:"), cls_msg(cls("NSColor"), sel("clearColor")));
-
-		/* General Drawing */
-		id mainView = msg((id)cls_alloc("NSVisualEffectView"), sel("initWithFrame:"), drawing_createFrame(0, 0, frameRect.size.width, frameRect.size.height));
-		msg(mainView, sel("setState:"), NSVisualEffectStateActive);
-		msg(mainView, sel("setBlendingMode:"), NSVisualEffectBlendingModeBehindWindow);
-		// msg(mainView, sel("setMaterial:"), NSVisualEffectMaterialContentBackground);
-
-		// msg(msg(win, sel("contentView")), sel("addSubview:"), mainView);
-		msg(win, sel("setContentView:"), mainView);
 	}
 
 	return win;

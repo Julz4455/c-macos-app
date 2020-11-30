@@ -19,12 +19,26 @@
 #define cls objc_getClass
 #define sel sel_getUid
 #define msg ((id (*)(id, SEL, ...))objc_msgSend)
+#define msg_sup ((id (*)(Class, SEL, ...))objc_msgSendSuper)
 #define cls_msg ((id (*)(Class, SEL, ...))objc_msgSend)
 #define cls_init(c) msg(msg((id)cls(c), sel("alloc")), sel("init"))
 #define cls_alloc(c) msg((id)cls(c), sel("alloc")) 
 #define cls_allpr objc_allocateClassPair
 #define cls_mthd class_addMethod
 #define cls_pair objc_registerClassPair
+
+
+/* Global Variables */
+int w, h;
+char* title;
+id controller;
+id win;
+
+/* general typedef */
+typedef long NSInteger;
+typedef double CGFloat;
+typedef double NSTimeInterval;
+typedef NSInteger NSModalResponse;
 
 /* typedef enums */
 typedef enum NSApplicationActivationPolicy {
@@ -55,9 +69,9 @@ typedef enum NSButtonType {
 } NSButtonType;
 
 typedef enum NSVisualEffectMaterial {
-	NSVisualEffectMaterialLight = 1,
-	NSVisualEffectMaterialWindowBackground = 12,
-	NSVisualEffectMaterialContentBackground = 18,
+	NSVisualEffectMaterialLight                 = 1,
+	NSVisualEffectMaterialWindowBackground      = 12,
+	NSVisualEffectMaterialContentBackground     = 18,
 	NSVisualEffectMaterialUnderWindowBackground = 21
 } NSVisualEffectMaterial;
 
@@ -68,8 +82,8 @@ typedef enum NSVisualEffectBlendingMode {
 
 typedef enum NSVisualEffectState {
   NSVisualEffectStateFollowsWindowActiveState = 0,
-  NSVisualEffectStateActive = 1,
-  NSVisualEffectStateInactive = 2,
+  NSVisualEffectStateActive                   = 1,
+  NSVisualEffectStateInactive                 = 2,
 } NSVisualEffectState;
 
 /* typedef structs */
